@@ -100,9 +100,8 @@
     </div>
 
     <script>
-        // تهيئة التليجرام وبدء التفاعل
         const tg = window.Telegram.WebApp;
-        tg.expand(); // فتح النافذة بالكامل
+        tg.expand();
         
         if(tg.initDataUnsafe.user) {
             document.getElementById('username').innerText = tg.initDataUnsafe.user.first_name;
@@ -111,7 +110,6 @@
         function createPacket() {
             let amt = document.getElementById('amount').value;
             if(!amt) return alert('أدخل المبلغ أولاً');
-            // توليد كود عشوائي
             let randomCode = "RED-" + Math.random().toString(36).substring(2, 9).toUpperCase();
             alert(`تم إنشاء الـ Red Packet بنجاح!\nالكود الخاص بك هو: ${randomCode}\nقيمة الجائزة: ${amt} BTTC`);
         }
