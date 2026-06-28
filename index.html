@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binance Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #181a20;
+            color: #eaecef;
+            margin: 0;
+            padding: 15px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #2f323b;
+        }
+        .logo { color: #f0b90b; font-size: 20px; font-weight: bold; }
+        .crypto-list { margin-top: 20px; }
+        .crypto-card {
+            display: flex;
+            justify-content: space-between;
+            background: #2b3139;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .price { color: #0ecb81; font-weight: bold; }
+        .red-packet-section {
+            background: #471111;
+            border: 1px solid #f6465d;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .btn {
+            background-color: #f0b90b;
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .btn-red { background-color: #f6465d; color: white; }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            background: #1e2329;
+            border: 1px solid #474d57;
+            color: white;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo">BINANCE CLONE</div>
+        <div id="username">أهلاً بك</div>
+    </div>
+
+    <div class="crypto-list">
+        <h3>أسعار العملات اليوم</h3>
+        <div class="crypto-card">
+            <span>BTTC / USDT</span>
+            <span class="price">$0.00000086</span>
+        </div>
+        <div class="crypto-card">
+            <span>BTC / USDT</span>
+            <span class="price">$64,250.00</span>
+        </div>
+        <div class="crypto-card">
+            <span>BNB / USDT</span>
+            <span class="price">$580.20</span>
+        </div>
+    </div>
+
+    <div class="red-packet-section">
+        <h3>🧧 ظرف عيديّة (Red Packet)</h3>
+        
+        <label>إنشاء كود Red Packet:</label>
+        <input type="number" id="amount" placeholder="المبلغ الرقمي">
+        <button class="btn btn-red" onclick="createPacket()">إنشاء كود كرت أحمر</button>
+        
+        <hr style="border-color: #555; margin: 15px 0;">
+        
+        <label>مطالبة بالكود (Claim):</label>
+        <input type="text" id="packetCode" placeholder="أدخل كود الـ Red Packet هنا">
+        <button class="btn" onclick="claimPacket()">تفعيل الكود واستلام المكافأة</button>
+    </div>
+
+    <script>
+        // تهيئة التليجرام وبدء التفاعل
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // فتح النافذة بالكامل
+        
+        if(tg.initDataUnsafe.user) {
+            document.getElementById('username').innerText = tg.initDataUnsafe.user.first_name;
+        }
+
+        function createPacket() {
+            let amt = document.getElementById('amount').value;
+            if(!amt) return alert('أدخل المبلغ أولاً');
+            // توليد كود عشوائي
+            let randomCode = "RED-" + Math.random().toString(36).substring(2, 9).toUpperCase();
+            alert(`تم إنشاء الـ Red Packet بنجاح!\nالكود الخاص بك هو: ${randomCode}\nقيمة الجائزة: ${amt} BTTC`);
+        }
+
+        function claimPacket() {
+            let code = document.getElementById('packetCode').value;
+            if(!code) return alert('برجاء إدخال الكود أولاً');
+            alert(`مبروك! تم تفعيل الكود ${code} وإضافة المكافأة لحسابك.`);
+        }
+    </script>
+</body>
+</html>
